@@ -1,0 +1,87 @@
+#!/bin/bash
+
+FILES=(		./test_files/ack.m
+		./test_files/ary.m
+		./test_files/blocks.m
+		./test_files/dangling.m
+		./test_files/fibo.m
+		./test_files/hello.m
+		./test_files/loops.m
+		./test_files/priority.m
+		./test_files/random.m
+		./test_files/sumcol.m
+   		./test_files/check_array_empty.m 
+		./test_files/check_array_sizes.m
+		./test_files/check_type_int.m
+		./test_files/check_type_compatible_1.m
+		./test_files/check_type_compatible_2.m
+		./test_files/check_type_compatible_3.m
+		./test_files/check_type_compatible_4.m
+		./test_files/check_declr_1.m
+		./test_files/check_declr_2.m
+		./test_files/check_declr_3.m
+		./test_files/check_paramlist_1.m
+		./test_files/check_paramlist_2.m
+		./test_files/check_var_1.m
+		./test_files/check_var_2.m
+		./test_files/check_var_3.m
+		./test_files/check_type_relational_1.m
+		./test_files/check_type_relational_2.m
+		./test_files/check_type_arith_1.m
+		./test_files/check_type_arith_2.m
+		./test_files/check_exp_1.m
+		./test_files/check_exp_2.m
+		./test_files/check_exp_3.m
+		./test_files/check_exp_4.m
+	  )
+ERRORS=(	"Ok"
+		"Ok"
+		"Ok"
+		"Ok"
+		"Ok"
+		"Ok"
+		"Ok"
+		"Ok"
+		"Ok"
+		"Ok"
+		"array size cannot be specified here"
+		"cannot declare an array inside an empty array"
+		"expression is not an integer"
+		"expression is of an incompatible"
+		"expression cannot be of type void"
+		"cannot convert a float to an int"
+		"cannot convert a float to a char"
+		"double declaration of variable"
+		"double declaration of function"
+		"double declaration of function prototype"
+		"... must be the last parameter of a function"
+		"parameter declared twice"
+		"variable is not declared"
+		"tried to index a value that is not an array"
+		"illegal use of a function"
+		"cannot compare an array"
+		"cannot compare a void value"
+		"cannot use an array in expression"
+		"cannot use a void value in expression"
+		"cannot negate an array"
+		"calling undeclared function"
+		"excess arguments in function call"
+		"missing arguments in function call"
+	   )
+
+OK="Ok"
+
+for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
+do
+  ./check_file ${FILES[i]} 2> err_msg.txt
+  MSG=`cat err_msg.txt | grep "${ERRORS[i]}"`
+  if [ -z "$MSG" ]
+  then
+    OK="error in type checker"
+  fi
+done
+
+rm err_msg.txt
+
+echo $OK
+

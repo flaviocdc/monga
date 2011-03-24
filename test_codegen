@@ -1,0 +1,26 @@
+#!/bin/bash
+
+FILES=(	fibo ack blocks dangling hello loops priority ary char )
+OUTPUTS=( "89" "1021" "0 3 2" "a is 1 and b is not 2" "hello world" "729" "1" "1000 3000" "gbcjp" )
+
+OK="Ok"
+
+for i in 0 1 2 3 4 5 6 7 8
+do
+  echo Testing ${FILES[i]}
+  ./compile.sh ./test_cg_files/${FILES[i]}
+  ./test_cg_files/${FILES[i]} > out_msg.txt
+  MSG=`cat out_msg.txt | grep "${OUTPUTS[i]}"`
+  if [ -z "$MSG" ]
+  then
+    OK="error in code generator"
+  fi
+  rm out_msg.txt
+  rm ./test_cg_files/${FILES[i]}
+  rm ./test_cg_files/${FILES[i]}.o
+  rm a.out
+  rm a.out.defs
+done
+
+echo $OK
+

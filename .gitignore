@@ -1,0 +1,7 @@
+test_parser
+test_scanner
+check_file
+*.o
+y.tab.*
+lex.yy.c
+compile
